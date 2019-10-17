@@ -2,6 +2,11 @@ import java.util.*;
 import java.util.Collections;
 import java.util.Random;
 //Priortizer 3:  No representation invariant.
+    /*
+    * pre: The structure should not be full
+    * post: The element should be inserted in the structure
+            The size of the structure should be increased by one
+    */
 class Prioritize3<T> implements Prioritizer<T>{
     //Declaring Arraylist to hold the data
     public ArrayList<T> list;
@@ -40,7 +45,11 @@ class Prioritize3<T> implements Prioritizer<T>{
         }
 
     }
-
+    /*
+     * pre: The structure should have at least one element
+     * post: An element must be removed from the structure
+             The structure's size should be decreased by one
+     */
     public void removeAny(){
         if(this.size()>=1){
             Random random=new Random();
@@ -50,7 +59,10 @@ class Prioritize3<T> implements Prioritizer<T>{
         else{
             this.list=new ArrayList<>();
         }}
-
+    /*
+     * pre: The structure should be well defined
+     * post: A valid number must be returned as output
+     */
     public int size(){
         return list.size();
     }
@@ -58,7 +70,11 @@ class Prioritize3<T> implements Prioritizer<T>{
     public boolean isInsertionPhase(){
         return this.isInInsertionPhase==true;
     }
-
+    /*
+    * pre: The structure should be in a valid phase before the operation
+    * post: The structure should have its phase changed
+            The structure should be in a valid phase after the operation
+    */
     public void changePhase(){
         if(this.isInInsertionPhase){
             this.isInInsertionPhase=false;

@@ -2,7 +2,6 @@ import java.util.*;
 import java.util.Collections;
 import java.util.Random;
 //Priortizer 1: If not in insertion phase, the contents are kept sorted according to the order.
-
 class Prioritize1<T> implements Prioritizer<T>{
     //Declaring Arraylist to hold the data
     public ArrayList<T> list;
