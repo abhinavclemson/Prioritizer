@@ -3,19 +3,21 @@ import java.util.Collections;
 import java.util.Random;
 //Priortizer 3:  No representation invariant.
     /*
-    * pre: The structure should not be full
-    * post: The element should be inserted in the structure
+    * pre condition: The structure should not be full
+    * post condition: The element should be inserted in the structure
             The size of the structure should be increased by one
     */
-class Prioritize3<T> implements Prioritizer<T>{
+class prior3<T> implements Prioritizer<T>{
     //Declaring Arraylist to hold the data
     public ArrayList<T> list;
     // public ArrayList<T> list2;
     //phase is True if the Prioritizer is in Insertion phase and False ,if in Removal phase
     boolean isInInsertionPhase;
     Comparator<T> compareObj;
+    int size=0;
 
-    Prioritize3(Comparator<T> comparator1){
+
+    prior3(Comparator<T> comparator1){
         this.compareObj = comparator1;
         this.isInInsertionPhase = false;
     }
@@ -26,28 +28,34 @@ class Prioritize3<T> implements Prioritizer<T>{
             System.out.println(this.list.get(index));
         }}
 
+
     public void insert(T i) {
         this.isInInsertionPhase = true;
-        if (isInsertionPhase())
-        {
+        if(this.size==0 && isInsertionPhase()) {
+            this.list = new ArrayList<>();
             this.list.add(i);
-
+            this.size = this.size();
+        }
+        else if (isInsertionPhase())
+        {
+            if(this.size()>0) {
+                this.list.add(i);
+                this.size=this.size();
+            }
         } else {
-
             System.out.println("Please Change the phase.");
         }
     }
-
     @Override
-    public void removeNextInOrder(T i) {
+    public void removeNextInOrder() {
         if (this.list.size()>0){
             this.list.remove(this.list.get(0));
         }
 
     }
     /*
-     * pre: The structure should have at least one element
-     * post: An element must be removed from the structure
+     * pre condition: The structure should have at least one element
+     * post condition: An element must be removed from the structure
              The structure's size should be decreased by one
      */
     public void removeAny(){
@@ -60,8 +68,8 @@ class Prioritize3<T> implements Prioritizer<T>{
             this.list=new ArrayList<>();
         }}
     /*
-     * pre: The structure should be well defined
-     * post: A valid number must be returned as output
+     * pre condition: The structure should be well defined
+     * post condition: A valid number must be returned as output
      */
     public int size(){
         return list.size();
@@ -71,8 +79,8 @@ class Prioritize3<T> implements Prioritizer<T>{
         return this.isInInsertionPhase==true;
     }
     /*
-    * pre: The structure should be in a valid phase before the operation
-    * post: The structure should have its phase changed
+    * pre condition: The structure should be in a valid phase before the operation
+    * post condition: The structure should have its phase changed
             The structure should be in a valid phase after the operation
     */
     public void changePhase(){

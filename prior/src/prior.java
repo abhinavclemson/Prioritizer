@@ -2,13 +2,15 @@ import java.util.*;
 import java.util.Collections;
 import java.util.Random;
 //Priortizer 1: If not in insertion phase, the contents are kept sorted according to the order.
-class Prioritize1<T> implements Prioritizer<T>{
+
+class prior<T> implements Prioritizer<T>{
     //Declaring Arraylist to hold the data
     public ArrayList<T> list;
    // public ArrayList<T> list2;
     //phase is True if the Prioritizer is in Insertion phase and False ,if in Removal phase
     boolean isInInsertionPhase;
     Comparator<T> compareObj;
+    int size=0;
     public void sort(){
         T min;
         int min_pos=0;
@@ -28,7 +30,8 @@ class Prioritize1<T> implements Prioritizer<T>{
 
         }
     }
-    Prioritize1(Comparator<T> comparator1){
+    prior(Comparator<T> comparator1){
+
         this.compareObj = comparator1;
         this.isInInsertionPhase = false;
     }
@@ -40,19 +43,25 @@ class Prioritize1<T> implements Prioritizer<T>{
     }}
 
     public void insert(T i) {
-        isInInsertionPhase = true;
-        if (isInsertionPhase())
+        this.isInInsertionPhase = true;
+        if(this.size==0 && isInsertionPhase()) {
+            this.list = new ArrayList<>();
+            this.list.add(i);
+            this.size = this.size();
+        }
+        else if (isInsertionPhase())
             {
-                this.list.add(i);
-
+                if(this.size()>0) {
+                    this.list.add(i);
+                    this.size=this.size();
+                }
         } else {
-
             System.out.println("Please Change the phase.");
         }
     }
 
     @Override
-    public void removeNextInOrder(T i) {
+    public void removeNextInOrder() {
             if (this.list.size()>0){
                 this.list.remove(this.list.get(0));
                 this.sort();
