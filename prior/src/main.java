@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class main{
-    @SuppressWarnings("resource")
     public static void main(String args[])  {
         int option, priority, flag = 1;
         //Integer[] listItem = new Integer[10] ;
